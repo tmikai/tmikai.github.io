@@ -21,3 +21,53 @@ body {
 .card:hover {
   transform: translateY(-5px);
 }
+
+.table-classe {
+  width: 100%;
+  max-width: 700px;
+  margin: 40px auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.table-classe thead {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.table-classe th,
+.table-classe td {
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.table-classe th {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.table-classe tbody tr {
+  transition: background 0.2s ease;
+}
+
+.table-classe tbody tr:nth-child(even) {
+  background-color: #f8f9fb;
+}
+
+.table-classe tbody tr:hover {
+  background-color: #e3efff;
+  cursor: pointer;
+}
+
+.table-classe td {
+  border-bottom: 1px solid #e0e6ed;
+}
