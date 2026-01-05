@@ -1,166 +1,644 @@
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="light">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio - Mikail Tasim</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #8b5cf6;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --accent: #06b6d4;
+      --text: #1e293b;
+      --text-light: #64748b;
+    }
 
-  <!-- Bootstrap 5 -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css" />
+    [data-theme="dark"] {
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --dark: #f8fafc;
+      --light: #0f172a;
+      --text: #f1f5f9;
+      --text-light: #cbd5e1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      transition: all 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* Header moderne avec gradient */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveBackground 20s linear infinite;
+    }
+
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .hero .subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      opacity: 0.95;
+      margin-bottom: 0.5rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero .location {
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      opacity: 0.85;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1.4s ease;
+    }
+
+    .btn-modern {
+      padding: 0.875rem 2rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.5rem;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg) scale(1.1);
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Navigation moderne */
+    .navbar-modern {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--light);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 1rem 0;
+    }
+
+    .navbar-modern .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    /* Cards modernes */
+    .card-modern {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+      height: 100%;
+    }
+
+    [data-theme="dark"] .card-modern {
+      background: #1e293b;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .card-modern:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    .card-modern h5 {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* Table projets */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 2rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-card h4 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .project-card .btn-download {
+      margin-top: 1rem;
+      background: white;
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .project-card .btn-download:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Contact section */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      text-align: center;
+      padding: 2rem;
+      background: var(--light);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .contact-item {
+      background: #1e293b;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .contact-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    [data-theme="dark"] footer {
+      background: #0f172a;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="bg-primary text-white text-center py-5 position-relative">
-    <div class="container">
-      <h1 class="display-4">Mikail Tasim</h1>
-      <p class="lead">Étudiant BTS SIO - Option SISR</p>
-      <p class="lead">CFA Robert Schuman Metz | DGFIP Nancy</p>
-      <a href="Jean-Dupont-CV.pdf" download class="btn btn-light mt-3">📄 Télécharger mon CV</a>
-      <button id="themeToggle" class="btn btn-outline-light position-absolute top-0 end-0 m-3">🌙</button>
-      <a href="presentation.html" download class="btn btn-light mt-3">Présentation</a>
-    </div>
-  </header>
-
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Portfolio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
-          <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projets">Projets</a></li>
-          <li class="nav-item"><a class="nav-link" href="#veille">Veille</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Mikail Tasim</h1>
+      <p class="subtitle">Étudiant BTS SIO - Option SISR</p>
+      <p class="location">CFA Robert Schuman Metz | DGFIP Nancy</p>
+      <div class="cta-buttons">
+        <a href="Jean-Dupont-CV.pdf" download class="btn-modern btn-primary">
+          📄 Télécharger mon CV
+        </a>
+        <a href="presentation.html" class="btn-modern btn-outline">
+          🎯 Ma présentation
+        </a>
       </div>
+    </div>
+  </section>
+
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+
+  <!-- Navigation -->
+  <nav class="navbar-modern">
+    <div class="container">
+      <div class="logo" style="font-weight: 700; font-size: 1.5rem; color: var(--primary);">MT</div>
+      <ul class="nav-links">
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#veille">Veille</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
-  <!-- CONTENU -->
-  <main class="container py-5">
-    <section id="profil" class="mb-5 section-fade">
-      <h2>Profil</h2>
-      <p>
-        Étudiant en BTS SIO (option SISR), je suis en alternance au service informatique des finances publiques à Nancy.
-        Je suis passionné par l'administration système, les réseaux et la cybersécurité.
-      </p>
-    </section>
-
-    <section id="competences" class="mb-5 section-fade">
-      <h2>Projets</h2>
-      <table class="table-classe">
-        <tbody>
-        <tr>
-          <td>GLPI</td>
-          <td>
-            <a href="CR_GLPI.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Veeam</td>
-          <td>
-            <a href="CR_VEEAM.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>RDS</td>
-          <td>
-            <a href="CR_RDS.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>SHELL</td>
-          <td>
-            <a href="CR_SHELL.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>SUPERVISION</td>
-          <td>
-            <a href="CR_PRTG.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>WDS</td>
-          <td>
-            <a href="CR_WDS.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>SERVEUR DE FICHIER</td>
-          <td>
-            <a href="CR_FS.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>DEBIAN</td>
-          <td>
-            <a href="CR_DEBIAN.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        <tr>
-          <td>AD</td>
-          <td>
-            <a href="CR_AD.pdf" download class="btn btn-light mt-3">Télécharger mon compte rendu !</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>      
-      
-    </section>
-
-    <section id="projets" class="mb-5 section-fade">
-      <h2>Compétences</h2>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Serveur de fichiers sécurisé</h5>
-          <p class="card-text">Installation Samba + contrôle LDAP sous Debian.</p>
-        </div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Script de sauvegarde automatisée</h5>
-          <p class="card-text">Bash avec logs + archivage + envoi par mail.</p>
+  <!-- Contenu -->
+  <main>
+    <!-- Profil -->
+    <section id="profil">
+      <div class="container">
+        <h2 class="section-title fade-in">À propos</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card-modern fade-in">
+              <p style="font-size: 1.2rem; line-height: 1.8; text-align: center;">
+                Étudiant en BTS SIO (option SISR), je suis en alternance au service informatique 
+                des finances publiques à Nancy. Je suis passionné par l'administration système, 
+                les réseaux et la cybersécurité.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="veille" class="mb-5 section-fade">
-      <h2>Veille technologique</h2>
-      <p>
-        Je m’informe sur les tendances cybersécurité via 
-        <a href="https://www.reddit.com/r/sysadmin/" target="_blank">reddit sysadmin</a>, 
-        <a href="https://next.ink/" target="_blank">next.ink</a>, ou encore 
-        <a href="https://www.lemondeinformatique.fr/" target="_blank">le monde informatique</a>.
-      </p>
+    <!-- Projets -->
+    <section id="projets" style="background: var(--light);">
+      <div class="container">
+        <h2 class="section-title fade-in">Mes Projets</h2>
+        <div class="projects-grid">
+          <div class="project-card fade-in">
+            <h4>GLPI</h4>
+            <p>Gestion de parc informatique et ticketing</p>
+            <a href="CR_GLPI.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>Veeam</h4>
+            <p>Solution de sauvegarde et restauration</p>
+            <a href="CR_VEEAM.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>RDS</h4>
+            <p>Remote Desktop Services</p>
+            <a href="CR_RDS.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>Shell Scripting</h4>
+            <p>Automatisation et administration</p>
+            <a href="CR_SHELL.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>Supervision PRTG</h4>
+            <p>Monitoring et alertes réseau</p>
+            <a href="CR_PRTG.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>WDS</h4>
+            <p>Windows Deployment Services</p>
+            <a href="CR_WDS.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>Serveur de Fichiers</h4>
+            <p>Configuration et sécurisation</p>
+            <a href="CR_FS.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>Debian</h4>
+            <p>Administration système Linux</p>
+            <a href="CR_DEBIAN.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+          <div class="project-card fade-in">
+            <h4>Active Directory</h4>
+            <p>Gestion d'annuaire et identités</p>
+            <a href="CR_AD.pdf" download class="btn-download">📥 Compte rendu</a>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- Compétences -->
+    <section id="competences">
+      <div class="container">
+        <h2 class="section-title fade-in">Compétences Techniques</h2>
+        <div class="row g-4">
+          <div class="col-md-6 fade-in">
+            <div class="card-modern">
+              <h5>🖥️ Serveur de fichiers sécurisé</h5>
+              <p>Installation Samba + contrôle LDAP sous Debian. Configuration des partages, gestion des permissions et sécurisation des accès.</p>
+            </div>
+          </div>
+          <div class="col-md-6 fade-in">
+            <div class="card-modern">
+              <h5>💾 Script de sauvegarde automatisée</h5>
+              <p>Bash avec logs + archivage + envoi par mail. Planification via cron et gestion des rotations de sauvegardes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section id="contact" class="mb-5 section-fade">
-      <h2>Contact</h2>
-      <p>Email :<a href="mailto:mikailtasim@gmail.com"> mikailtasim@gmail.com</a> </p>
-      <p>Téléphone : 07 69 95 91 20</p>
-      <p> <a href="https://www.linkedin.com/in/mikail-tasim-47a8bb203/">LinkedIn</a></p>
+    <!-- Veille -->
+    <section id="veille" style="background: var(--light);">
+      <div class="container">
+        <h2 class="section-title fade-in">Veille Technologique</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card-modern fade-in">
+              <p style="font-size: 1.1rem; line-height: 1.8;">
+                Je m'informe régulièrement sur les tendances en cybersécurité et administration système via :
+              </p>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem;">
+                <a href="https://www.reddit.com/r/sysadmin/" target="_blank" class="btn-modern btn-primary">Reddit Sysadmin</a>
+                <a href="https://next.ink/" target="_blank" class="btn-modern btn-primary">Next INpact</a>
+                <a href="https://www.lemondeinformatique.fr/" target="_blank" class="btn-modern btn-primary">Le Monde Informatique</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title fade-in">Me Contacter</h2>
+        <div class="contact-info">
+          <div class="contact-item fade-in">
+            <div class="icon">📧</div>
+            <h5>Email</h5>
+            <a href="mailto:mikailtasim@gmail.com">mikailtasim@gmail.com</a>
+          </div>
+          <div class="contact-item fade-in">
+            <div class="icon">📱</div>
+            <h5>Téléphone</h5>
+            <p>07 69 95 91 20</p>
+          </div>
+          <div class="contact-item fade-in">
+            <div class="icon">💼</div>
+            <h5>LinkedIn</h5>
+            <a href="https://www.linkedin.com/in/mikail-tasim-47a8bb203/" target="_blank">Mon profil</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p class="mb-0">&copy; 2025 Mikail Tasim - Portfolio BTS SIO</p>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mikail Tasim - Portfolio BTS SIO</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    // Theme Toggle
+    const btn = document.getElementById("themeToggle");
+    const html = document.documentElement;
+
+    btn.addEventListener("click", () => {
+      const currentTheme = html.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", newTheme);
+      btn.textContent = newTheme === "dark" ? "☀️" : "🌙";
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".fade-in").forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
