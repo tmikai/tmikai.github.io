@@ -71,3 +71,39 @@ body {
 .table-classe td {
   border-bottom: 1px solid #e0e6ed;
 }
+   /* Contact section */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(2,450px);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      text-align: center;
+      padding: 2rem;
+      background: var(--light);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .contact-item {
+      background: #1e293b;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .contact-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 100;
+    }
