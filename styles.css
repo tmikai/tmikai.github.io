@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
 
 :root {
-  --primary: #479c56;
-  --primary-dark: #ae5ab6;
+  --primary: #5bd36f;
   --secondary: #4c11d4;
   --dark: #0f172a;
   --light: #f8fafc;
@@ -12,8 +11,6 @@
 }
 
 [data-theme="dark"] {
-  --primary: #5bd36f;
-  --primary-dark: #ae5ab6;
   --dark: #f8fafc;
   --light: #0f172a;
   --text: #f1f5f9;
