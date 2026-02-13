@@ -867,6 +867,10 @@ footer {
   background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
+.sophos-box {
+  background: linear-gradient(135deg, #10be8a, #47e76a);
+}
+
 .monitoring-box {
   background: linear-gradient(135deg, #43e97b, #38f9d7);
 }
@@ -1104,7 +1108,7 @@ footer {
 
 .tech-badge {
   display: inline-block;
-  background: linear-gradient(135deg, rgba(91, 211, 111, 0.2), rgba(76, 17, 212, 0.2));
+  background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 255, 255));
   color: var(--primary);
   padding: 0.5rem 1rem;
   border-radius: 20px;

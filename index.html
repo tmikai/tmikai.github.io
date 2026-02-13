@@ -72,7 +72,7 @@
     </div>
   </section>
 
-  <button class="theme-toggle" id="themeToggle">🌙</button>
+   <!-- <button class="theme-toggle" id="themeToggle">🌙</button>-->
 
   <!-- Navigation -->
   <nav class="navbar-modern">
@@ -166,10 +166,14 @@
       </div>
     </section>
         <!-- Architecture Diagram -->
+
         <div class="row justify-content-center mb-5 fade-in">
           <div class="col-lg-10">
+                          
             <div class="architecture-card">
+        <h2 class="section-title fade-in">Homelab</h2>
               <h4>Architecture Infrastructure</h4>
+
               <div class="architecture-diagram">
                 <div class="arch-layer">
                   <div class="arch-label">Hyperviseur</div>
@@ -184,10 +188,17 @@
                 <div class="arch-layer">
                   <div class="arch-label">Services</div>
                   <div class="arch-boxes-row">
+
+                    <div class="arch-box sophos-box">
+                      Sophos
+                      <div class="arch-small">Firewall & vlan</div>
+                    </div>
+
                     <div class="arch-box truenas-box">
-                      TrueNAS Scale
+                      TrueNAS 
                       <div class="arch-small">Stockage & NAS</div>
                     </div>
+
                     <div class="arch-box jellyfin-box">
                       Jellyfin
                       <div class="arch-small">Streaming Multimedia</div>
@@ -210,9 +221,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Projets détaillés -->
-       v>
 
         <!-- Technologies Stack -->
         <div class="row justify-content-center fade-in">
@@ -393,14 +401,14 @@
     // Theme Toggle
     const btn = document.getElementById("themeToggle");
     const html = document.documentElement;
-
+/*
     btn.addEventListener("click", () => {
       const currentTheme = html.getAttribute("data-theme");
       const newTheme = currentTheme === "dark" ? "light" : "dark";
       html.setAttribute("data-theme", newTheme);
       btn.textContent = newTheme === "dark" ? "☀️" : "🌙";
     });
-
+*/
     // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver(
       entries => {
