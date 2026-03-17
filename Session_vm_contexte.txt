@@ -1,0 +1,11 @@
+Session toute vm linux:
+utilisateur: user
+mdp: resu
+
+Session toute vm windows:
+utilisateur: administrateur
+mdp: Azerty123!
+
+prtg:
+
+rsyslog:
