@@ -2,10 +2,22 @@ Session toute vm linux:
 utilisateur: user
 mdp: resu
 
+utilisateur: root
+mdp: toor
+
 Session toute vm windows:
 utilisateur: administrateur
 mdp: Azerty123!
 
 prtg:
+utilisateur: prtgadmin
+mdp: Azerty123!
 
 rsyslog:
+utilisateur: root
+mdp: toor
+
+SNS_IN et SNS_OUT:
+utilisateur: admin
+mdp: Azerty123!
+
